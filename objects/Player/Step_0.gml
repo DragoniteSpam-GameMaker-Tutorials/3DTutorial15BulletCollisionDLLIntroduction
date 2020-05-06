@@ -11,23 +11,33 @@ if (keyboard_check_direct(vk_escape)) {
 }
 
 var move_speed = 4;
+var dx = 0;
+var dy = 0;
 
 if (keyboard_check(ord("A"))) {
-    x -= dsin(look_dir) * move_speed;
-    y -= dcos(look_dir) * move_speed;
+    dx -= dsin(look_dir) * move_speed;
+    dy -= dcos(look_dir) * move_speed;
 }
 
 if (keyboard_check(ord("D"))) {
-    x += dsin(look_dir) * move_speed;
-    y += dcos(look_dir) * move_speed;
+    dx += dsin(look_dir) * move_speed;
+    dy += dcos(look_dir) * move_speed;
 }
 
 if (keyboard_check(ord("W"))) {
-    x += dcos(look_dir) * move_speed;
-    y -= dsin(look_dir) * move_speed;
+    dx += dcos(look_dir) * move_speed;
+    dy -= dsin(look_dir) * move_speed;
 }
 
 if (keyboard_check(ord("S"))) {
-    x -= dcos(look_dir) * move_speed;
-    y += dsin(look_dir) * move_speed;
+    dx -= dcos(look_dir) * move_speed;
+    dy += dsin(look_dir) * move_speed;
+}
+
+if (!c_overlap_position(c_object, x + dx, y, z)) {
+    x += dx;
+}
+
+if (!c_overlap_position(c_object, x, y + dy, z)) {
+    y += dy;
 }
